@@ -5,6 +5,9 @@ namespace SqlFu.Builders
     public interface IBuildQueryFrom
     {
         IWhere<T> From<T>(Action<IHelperOptions> opt = null);
+
+        IWhere<T> FromTemplate<T>(IQueryTemplate<T> template, Action<IHelperOptions> opt = null);
+
         /// <summary>
         /// Specify the anonymous type to be used as a table
         /// </summary>

@@ -122,5 +122,10 @@ namespace SqlFu.Providers
             //Single part identifier can be returned as is.
             return startId + s + endId;           
         }
+        public virtual string BuidCommonTableExpression(string sqlTemplate, string viewName)
+        {
+            var result = $"with {viewName} as ({sqlTemplate}) ";
+            return result;
+        }
     }
 }

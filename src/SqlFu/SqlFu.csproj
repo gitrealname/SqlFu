@@ -73,6 +73,7 @@
     <Compile Include="Builders\IFrom.cs" />
     <Compile Include="Builders\IGenerateSql.cs" />
     <Compile Include="Builders\IPaged.cs" />
+    <Compile Include="Builders\IQueryTemplate.cs" />
     <Compile Include="Builders\ISelect.cs" />
     <Compile Include="Builders\ISort.cs" />
     <Compile Include="Builders\IWhere.cs" />
