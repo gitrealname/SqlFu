@@ -45,5 +45,7 @@ namespace SqlFu.Providers
 
         IDbProviderExpressions ExpressionsHelper { get; }
         void ReplaceExpressionsProvider(IDbProviderExpressions prov);
+
+        string BuidCommonTableExpression(string sqlTemplate, string viewName);
     }
 }
