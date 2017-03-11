@@ -19,7 +19,7 @@ namespace Tests.Providers.MsSql
         {
             LogManager.OutputToConsole();
             SqlFuManager.UseLogManager();
-            _db = Setup.GetConnection();
+            //_db = Setup.GetConnection();
         }
 
         //[Fact]

@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B20D48EF-A377-44D7-A576-56D9D4521DC6}</ProjectGuid>
+    <ProjectGuid>{CC6D8079-500F-457B-9FF2-CE0A68EDCCF0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SqlFu</RootNamespace>
     <AssemblyName>SqlFu</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +20,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,120 +28,142 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\SqlFu.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CavemanTools, Version=3.45.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CavemanTools.3.45.0\lib\Net45\CavemanTools.dll</HintPath>
+    <Reference Include="CavemanTools, Version=4.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CavemanTools.4.5.1\lib\net46\CavemanTools.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AStorageCreator.cs" />
     <Compile Include="ATypedStorageCreator.cs" />
     <Compile Include="Builders\BuiltSql.cs" />
+    <Compile Include="Builders\CreateTable\ColumnDefinition.cs" />
     <Compile Include="Builders\CreateTable\ConfigureTableExtensions.cs" />
     <Compile Include="Builders\CreateTable\CreateTableBuilder.cs" />
     <Compile Include="Builders\CreateTable\FKConfig.cs" />
     <Compile Include="Builders\CreateTable\ForeignKeyDefinition.cs" />
     <Compile Include="Builders\CreateTable\IConfigureForeignKeys.cs" />
+    <Compile Include="Builders\CreateTable\IConfigureTable.cs" />
     <Compile Include="Builders\CreateTable\IndexDefinition.cs" />
     <Compile Include="Builders\CreateTable\PKData.cs" />
     <Compile Include="Builders\CreateTable\TableConfigurator.cs" />
     <Compile Include="Builders\CreateTable\TableCreationData.cs" />
-    <Compile Include="Builders\DeleteBuilder.cs" />
-    <Compile Include="Builders\Expressions\ExpressionWriter.cs" />
+    <Compile Include="Builders\Crud\DeleteTableBuilder.cs" />
+    <Compile Include="Builders\Crud\InsertSqlBuilder.cs" />
+    <Compile Include="Builders\Crud\SimpleSqlBuilder.cs" />
+    <Compile Include="Builders\Crud\UpdateTableBuilder.cs" />
+    <Compile Include="Builders\CustomSqlExecutor.cs" />
+    <Compile Include="Builders\Expressions\ExpressionHelpers.cs" />
+    <Compile Include="Builders\Expressions\ExpressionSqlGenerator.cs" />
     <Compile Include="Builders\Expressions\ExpressionWriterHelper.cs" />
-    <Compile Include="Builders\IBuildSql.cs" />
+    <Compile Include="Builders\Expressions\IExpressionWriterHelper.cs" />
+    <Compile Include="Builders\Expressions\IGenerateSqlFromExpressions.cs" />
     <Compile Include="Builders\IBuildUpdateTable.cs" />
+    <Compile Include="Builders\IExecuteCustomSql.cs" />
     <Compile Include="Builders\IFrom.cs" />
-    <Compile Include="Builders\InsertSqlBuilder.cs" />
+    <Compile Include="Builders\IGenerateSql.cs" />
     <Compile Include="Builders\IPaged.cs" />
     <Compile Include="Builders\ISelect.cs" />
     <Compile Include="Builders\ISort.cs" />
     <Compile Include="Builders\IWhere.cs" />
+    <Compile Include="Builders\OrderBy.cs" />
     <Compile Include="Builders\PagedBuilderResult.cs" />
     <Compile Include="Builders\PagedQueryBuilder.cs" />
     <Compile Include="Builders\ParametersManager.cs" />
-    <Compile Include="Builders\SimpleSqlBuilder.cs" />
+    <Compile Include="Builders\SqlBuilderExtensions.cs" />
     <Compile Include="Builders\SqlFrom.cs" />
-    <Compile Include="Builders\UpdateBuilder.cs" />
+    <Compile Include="Builders\TableExistsAction.cs" />
     <Compile Include="Builders\UpdateColumns.cs" />
-    <Compile Include="Configuration\Internals\ColumnInfo.cs" />
-    <Compile Include="DbFactory.cs" />
-    <Compile Include="HelperOptions.cs" />
-    <Compile Include="IBuildSql.cs" />
-    <Compile Include="Configuration\ExpressionHelpers.cs" />
+    <Compile Include="CommandConfiguration.cs" />
+    <Compile Include="Configuration\DbAccessProfile.cs" />
     <Compile Include="Configuration\ForeignKeyRelationCascade.cs" />
-    <Compile Include="Configuration\Internals\IfTableExists.cs" />
+    <Compile Include="Configuration\Internals\ColumnInfo.cs" />
+    <Compile Include="Configuration\Internals\PagedSqlCache.cs" />
     <Compile Include="Configuration\Internals\TableExistsException.cs" />
-    <Compile Include="CrudHelpers.cs" />
-    <Compile Include="DbTest.cs" />
-    <Compile Include="DDLExtensions.cs" />
-    <Compile Include="Executors\SqlFuConnection.cs" />
-    <Compile Include="ICreateStorage.cs" />
-    <Compile Include="IDbFactory.cs" />
-    <Compile Include="IHelperOptions.cs" />
-    <Compile Include="IInsertedId.cs" />
-    <Compile Include="InsertSqlOptions.cs" />
-    <Compile Include="InvalidPagedSqlException.cs" />
-    <Compile Include="Mapping\Internals\AnonymousTypeMapper.cs" />
-    <Compile Include="Mapping\Internals\ValueTypeMapper.cs" />
-    <Compile Include="Mapping\ManualMapper.cs" />
-    <Compile Include="Providers\AbstractProviderExpressions.cs" />
-    <Compile Include="Providers\DbFunctions.cs" />
-    <Compile Include="Providers\DbProvider.cs" />
-    <Compile Include="Providers\DbSpecificOption.cs" />
-    <Compile Include="Providers\IDatabaseTools.cs" />
-    <Compile Include="Providers\IDbProvider.cs" />
-    <Compile Include="Providers\DbTypes.cs" />
-    <Compile Include="Providers\IDbProviderExpressions.cs" />
-    <Compile Include="Providers\IEscapeIdentifier.cs" />
-    <Compile Include="Configuration\SqlProfile.cs" />
-    <Compile Include="SProcInput.cs" />
-    <Compile Include="SProcResult.cs" />
-    <Compile Include="SqlExtensions.cs" />
-    <Compile Include="Providers\SqlServer\SqlServerDbTools.cs" />
-    <Compile Include="Providers\SqlServer\SqlServerDbType.cs" />
-    <Compile Include="Providers\SqlServer\SqlServer2012Expressions.cs" />
-    <Compile Include="Providers\SqlServer\SqlServerFunctions.cs" />
-    <Compile Include="Providers\SqlServer\SqlServer2012Provider.cs" />
-    <Compile Include="DbConnectionExtensions.cs" />
-    <Compile Include="SqlFuManager.cs" />
-    <Compile Include="StoredProcsExtensions.cs" />
-    <Compile Include="TableAttribute.cs" />
-    <Compile Include="Utils.cs" />
     <Compile Include="Configuration\Internals\TableInfo.cs" />
     <Compile Include="Configuration\Internals\TableInfoFactory.cs" />
-    <Compile Include="Executors\PrepareStatement.cs" />
-    <Compile Include="DbCommandExtensions.cs" />
-    <Compile Include="Mapping\Internals\ConvertersManager.cs" />
-    <Compile Include="Mapping\Internals\CustomMappers.cs" />
-    <Compile Include="Mapping\Internals\DynamicMapper.cs" />
+    <Compile Include="Configuration\Internals\TableSqlCache.cs" />
     <Compile Include="Configuration\ITableInfoFactory.cs" />
+    <Compile Include="Configuration\TableName.cs" />
+    <Compile Include="Configuration\TransientErrorsConfig.cs" />
+    <Compile Include="DbFactory.cs" />
+    <Compile Include="DbTest.cs" />
+    <Compile Include="Executors\PrepareStatement.cs" />
+    <Compile Include="Executors\SqlFuConnection.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Extensions\DbCommandExtensions.cs" />
+    <Compile Include="Extensions\DbConnectionExtensions.cs" />
+    <Compile Include="Extensions\FluentCommandBuilder.cs" />
+    <Compile Include="Extensions\IProcessEachRow.cs" />
+    <Compile Include="Extensions\IQueryAndProcess.cs" />
+    <Compile Include="Extensions\IQuerySql.cs" />
+    <Compile Include="Extensions\IWithSql.cs" />
+    <Compile Include="Extensions\IWithSqlAsync.cs" />
+    <Compile Include="Extensions\TransientResilienceExtensions.cs" />
+    <Compile Include="Helpers\CrudHelpers.cs" />
+    <Compile Include="Helpers\DDLExtensions.cs" />
+    <Compile Include="Helpers\ExceptionHelpers.cs" />
+    <Compile Include="Helpers\HelperOptions.cs" />
+    <Compile Include="Helpers\IHelperOptions.cs" />
+    <Compile Include="Helpers\IInsertedId.cs" />
+    <Compile Include="Helpers\InsertSqlOptions.cs" />
+    <Compile Include="IDbFactory.cs" />
+    <Compile Include="InvalidPagedSqlException.cs" />
     <Compile Include="Mapping\IManageConverters.cs" />
     <Compile Include="Mapping\IMapReaderToPoco.cs" />
+    <Compile Include="Mapping\Internals\AnonymousTypeMapper.cs" />
+    <Compile Include="Mapping\Internals\ConvertersManager.cs" />
+    <Compile Include="Mapping\Internals\CustomMappersConfiguration.cs" />
+    <Compile Include="Mapping\Internals\DynamicMapper.cs" />
     <Compile Include="Mapping\Internals\IMapPocoManually.cs" />
+    <Compile Include="Mapping\Internals\Mapper.cs" />
     <Compile Include="Mapping\Internals\MapperFactory.cs" />
     <Compile Include="Mapping\Internals\PopulatePocoGenerator.cs" />
+    <Compile Include="Mapping\Internals\SqlFuDynamic.cs" />
+    <Compile Include="Mapping\Internals\ValueTypeMapper.cs" />
+    <Compile Include="Mapping\IPopulatePoco.cs" />
     <Compile Include="Mapping\IRegisterConverter.cs" />
     <Compile Include="Mapping\IRegisterCustomMappers.cs" />
-    <Compile Include="Mapping\IPopulatePoco.cs" />
-    <Compile Include="Mapping\Internals\Mapper.cs" />
-    <Compile Include="Mapping\Internals\SqlFuDynamic.cs" />
+    <Compile Include="Mapping\ManualMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\DbProvider.cs" />
+    <Compile Include="Providers\DbProviderExpressions.cs" />
+    <Compile Include="Providers\DbTypes.cs" />
+    <Compile Include="Providers\EscapeIdentifierChars.cs" />
+    <Compile Include="Providers\IDatabaseTools.cs" />
+    <Compile Include="Providers\IDbProvider.cs" />
+    <Compile Include="Providers\IDbProviderExceptions.cs" />
+    <Compile Include="Providers\IDbProviderExpressions.cs" />
+    <Compile Include="Providers\IDbProviderHelpers.cs" />
+    <Compile Include="Providers\IEscapeIdentifier.cs" />
+    <Compile Include="Providers\Sqlite\Extensions.cs" />
+    <Compile Include="Providers\Sqlite\SqliteDbTools.cs" />
+    <Compile Include="Providers\Sqlite\SqliteExpressions.cs" />
+    <Compile Include="Providers\Sqlite\SqliteProvider.cs" />
+    <Compile Include="Providers\Sqlite\SqliteType.cs" />
+    <Compile Include="Providers\SqlServer\Extensions.cs" />
+    <Compile Include="Providers\SqlServer\SqlServer2012Expressions.cs" />
+    <Compile Include="Providers\SqlServer\SqlServer2012Provider.cs" />
+    <Compile Include="Providers\SqlServer\SqlServerDbTools.cs" />
+    <Compile Include="Providers\SqlServer\SqlServerType.cs" />
     <Compile Include="SqlFuConfig.cs" />
-    <Compile Include="Builders\CreateTable\ColumnDefinition.cs" />
-    <Compile Include="Builders\CreateTable\IConfigureTable.cs" />
-    <Compile Include="CommandConfiguration.cs" />
+    <Compile Include="SqlFuManager.cs" />
+    <Compile Include="StoredProcedures\SProcInput.cs" />
+    <Compile Include="StoredProcedures\SProcResult.cs" />
+    <Compile Include="StoredProcedures\StoredProcsExtensions.cs" />
+    <Compile Include="TableAttribute.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
