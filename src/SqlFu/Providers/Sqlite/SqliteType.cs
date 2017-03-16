@@ -12,7 +12,12 @@ namespace SqlFu.Providers.Sqlite
 
         public SqliteType()
         {
+            this[typeof(float)] = Real;
+            this[typeof(double)] = Real;
+            this[typeof(bool)] = Text;
+            this[typeof(bool?)] = Text;
             this[typeof(string)] = Text;
+            this[typeof(char)] = Text;
             this[typeof(int)] = Integer;
             this[typeof(int?)] = Integer;
             this[typeof(Guid)] = Blob;
